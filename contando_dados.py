@@ -20,14 +20,17 @@ imgBin = cv2.bitwise_not(imgBin)
 bordas = cv2.Canny(imgBin, 70, 150)
 
 # Contagem dos contornos
-(objetos, lx) = cv2.findContours(bordas.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-cv2.putText(imgCinza, 'Tons de cinza', (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,0,0), 0, cv2.LINE_AA)
-cv2.putText(blur, 'Blur', (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,0,0), 0, cv2.LINE_AA)
+(lx, objetos, lx) = cv2.findContours(bordas.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+cv2.putText(imgCinza, 'Tons de cinza', (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 0, cv2.LINE_AA)
+cv2.putText(blur, 'Blur', (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 0, cv2.LINE_AA)
 cv2.putText(imgBin, 'Binarizacao', (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,0,0), 0, cv2.LINE_AA)
 cv2.putText(bordas, 'Bordas', (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,0,0), 0, cv2.LINE_AA)
 
 # Exibindo imagens
-cv2.imshow("Quantidade de objetos: "+str(len(objetos)), numpy.vstack([numpy.hstack([imgCinza, blur]),numpy.hstack([imgBin, bordas])]))
+cv2.imshow("Cinza", imgCinza)
+cv2.imshow("Filto blur", blur)
+cv2.imshow("Binarizada", imgBin)
+cv2.imshow("Bordas", bordas)
 cv2.waitKey(0)
 imgC2 = img.copy()
 cv2.imshow("Imagem Original", img)
